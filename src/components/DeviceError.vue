@@ -1,0 +1,143 @@
+<template>
+  <div class="transition popup" v-bind:class="{shown: shown, 'force-zindex': force_zindex, 'd-none': !shown}">
+    <div>
+      <Title/>
+      <div class="rules-wrapper color-white">
+        <div class="rules-block">
+          <h1 class="font-russo-one text-center">Something went wrong!</h1>
+          <h2 class="font-montserrat-regular">Please contact support!</h2>
+        </div>
+      </div>
+      <div class="footer-contact font-montserrat color-white">
+        <div>Saburtalo, St. Kazbegi 23</div>
+        <div>+995 551 545 716</div>
+        <div>Mykeybox.com</div>
+        <div>help@mykeybox.com</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.popup {
+  background: url('/src/assets/image/bg.svg') center fixed;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  &.shown {
+    opacity: 1;
+    z-index: 1;
+  }
+
+  &.force-zindex {
+    z-index: 1 !important;
+  }
+}
+
+.rules-wrapper {
+  background-color: #363636;
+  margin: 30px auto;
+  width: 500px;
+  height: 360px;
+  padding: 15px;
+  border-radius: 20px;
+
+  .rules-block {
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 5px;
+
+    h2 {
+      font-size: 23px;
+    }
+
+    div {
+      font-size: 13px;
+    }
+
+    &::-webkit-scrollbar {
+      width: 5px;
+      transition: all 0.5s;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0);
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #D9D9D9;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+}
+
+.footer-contact {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+}
+
+.d-none {
+  display: none;
+}
+</style>
+
+<script>
+import Title from "@/components/Title.vue";
+import Back from "@/components/Back.vue";
+
+export default {
+  components: {Back, Title},
+  data() {
+    return {
+      shown: false,
+      force_zindex: false,
+    }
+  },
+  mounted() {
+    setInterval(() => {
+      this.checkServer()
+    }, 5 * 1000)
+    this.checkServer()
+  },
+  methods: {
+    closePopup() {
+      this.shown = false
+      this.force_zindex = true
+      setTimeout(() => {
+        this.force_zindex = false
+      }, 500)
+    },
+    openPopup() {
+      this.shown = true
+      this.$router.push({name: 'home'})
+    },
+    checkServer() {
+      this.$axios.get('/').then((response) => {
+        if (response.data === 'up') {
+          if (this.shown) {
+            this.closePopup()
+          }
+        } else {
+          this.openPopup()
+        }
+      }, () => {
+        this.openPopup()
+      })
+    },
+  },
+}
+</script>

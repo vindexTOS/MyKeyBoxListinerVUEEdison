@@ -1,85 +1,59 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <div class="cube">
+    <div class="flex-center-container">
+      <transition name="fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
+      <DeviceError/>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style scoped lang="scss">
+.cube {
+  width: 854px;
+  height: 532px;
+  border: 1px solid red;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+:global(body) {
+  overflow: hidden;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
+
+<script setup lang="ts">
+import {RouterView} from 'vue-router'
+import DeviceError from "@/components/DeviceError.vue";
+</script>
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      // initial_countdown: 2,
+      // countdown: 2,
+    }
+  },
+  mounted() {
+    // this.$el.addEventListener('click', () => this.countdown = this.initial_countdown)
+    // this.$el.addEventListener('mousemove', () => this.countdown = this.initial_countdown)
+    // this.$el.addEventListener('keypress', () => this.countdown = this.initial_countdown)
+    // this.$el.addEventListener('keyup', () => this.countdown = this.initial_countdown)
+    // this.$el.addEventListener('touchstart', () => this.countdown = this.initial_countdown)
+    // this.$el.addEventListener('touchmove', () => this.countdown = this.initial_countdown)
+
+    // setInterval(() => {
+    //     this.countdown = this.countdown - 1
+    //     if (this.countdown <= 0) {
+    //         window.location.reload()
+    //     }
+    // }, 1000)
+  },
+}
+</script>
