@@ -36,24 +36,24 @@ import DeviceError from "@/components/DeviceError.vue";
 export default {
   data() {
     return {
-      // initial_countdown: 2,
-      // countdown: 2,
+      initial_countdown: 10,
+      countdown: 10,
     }
   },
   mounted() {
-    // this.$el.addEventListener('click', () => this.countdown = this.initial_countdown)
-    // this.$el.addEventListener('mousemove', () => this.countdown = this.initial_countdown)
-    // this.$el.addEventListener('keypress', () => this.countdown = this.initial_countdown)
-    // this.$el.addEventListener('keyup', () => this.countdown = this.initial_countdown)
-    // this.$el.addEventListener('touchstart', () => this.countdown = this.initial_countdown)
-    // this.$el.addEventListener('touchmove', () => this.countdown = this.initial_countdown)
+    this.$el.addEventListener('click', () => this.countdown = this.initial_countdown)
+    this.$el.addEventListener('mousemove', () => this.countdown = this.initial_countdown)
+    this.$el.addEventListener('keypress', () => this.countdown = this.initial_countdown)
+    this.$el.addEventListener('keyup', () => this.countdown = this.initial_countdown)
+    this.$el.addEventListener('touchstart', () => this.countdown = this.initial_countdown)
+    this.$el.addEventListener('touchmove', () => this.countdown = this.initial_countdown)
 
-    // setInterval(() => {
-    //     this.countdown = this.countdown - 1
-    //     if (this.countdown <= 0) {
-    //         window.location.reload()
-    //     }
-    // }, 1000)
+    setInterval(() => {
+        this.countdown = this.countdown - 1
+        if (this.countdown <= 0) {
+            window.location.reload()
+        }
+    }, 1000)
   },
 }
 </script>
