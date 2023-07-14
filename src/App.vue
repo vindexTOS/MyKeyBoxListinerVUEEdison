@@ -13,7 +13,7 @@
 .cube {
   width: 854px;
   height: 532px;
-  border: 1px solid red;
+  //border: 1px solid red; // Only for testing
   position: absolute;
   left: 0;
   right: 0;
