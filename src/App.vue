@@ -36,8 +36,8 @@ import DeviceError from "@/components/DeviceError.vue";
 export default {
   data() {
     return {
-      initial_countdown: 10,
-      countdown: 10,
+      initial_countdown: 30,
+      countdown: 30,
     }
   },
   mounted() {
@@ -51,7 +51,11 @@ export default {
     setInterval(() => {
         this.countdown = this.countdown - 1
         if (this.countdown <= 0) {
-            window.location.reload()
+          if (this.$route.name === 'home') {
+            window.location.href = '/'
+          } else {
+            this.countdown = this.initial_countdown
+          }
         }
     }, 1000)
   },
