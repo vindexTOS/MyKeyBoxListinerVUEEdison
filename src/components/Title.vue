@@ -1,5 +1,5 @@
 <template>
-    <div class="font-russo-one color-main title text-center">Epee</div>
+    <div class="font-russo-one color-main title text-center">MyKeyBox</div>
 </template>
 
 <style scoped>

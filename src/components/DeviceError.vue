@@ -126,18 +126,17 @@ export default {
       this.$router.push({name: 'home'})
     },
     checkServer() {
-      this.closePopup()
-      // this.$axios.get('/').then((response) => {
-      //   if (response.data === 'up') {
-      //     if (this.shown) {
-      //       this.closePopup()
-      //     }
-      //   } else {
-      //     this.openPopup()
-      //   }
-      // }, () => {
-      //   this.openPopup()
-      // })
+      this.$axios.get('/').then((response) => {
+        if (response.data === 'up') {
+          if (this.shown) {
+            this.closePopup()
+          }
+        } else {
+          this.openPopup()
+        }
+      }, () => {
+        this.openPopup()
+      })
     },
   },
 }
