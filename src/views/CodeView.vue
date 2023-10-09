@@ -182,7 +182,7 @@ export default {
     return {
       code: '',
       type: '',
-      checked: false,
+      checked: true,
       invalid: false,
       checking: false,
       valid: false,
