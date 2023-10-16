@@ -180,9 +180,9 @@ import Rules from "@/components/Rules.vue";
 export default {
   data() {
     return {
-      code: '123456',
-      type: 'D',
-      checked: false,
+      code: '',
+      type: '',
+      checked: true,
       invalid: false,
       checking: false,
       valid: false,
