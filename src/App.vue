@@ -36,8 +36,8 @@ import DeviceError from "@/components/DeviceError.vue";
 export default {
   data() {
     return {
-      initial_countdown: 10,
-      countdown: 10,
+      initial_countdown: 60,
+      countdown: 60,
     }
   },
   mounted() {
