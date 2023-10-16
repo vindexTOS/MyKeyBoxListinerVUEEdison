@@ -1,7 +1,7 @@
 <template>
     <section class="homepage">
         <div class="welcome text-center color-white font-montserrat">Welcome to</div>
-        <div class="mykeybox text-center color-main font-russo-one">MyKeyBox</div>
+        <div class="mykeybox text-center color-main font-russo-one">Givi</div>
         <div class="flex-center-container">
             <router-link :to="{name: 'code'}" class="press-to-start font-montserrat">Press to start</router-link>
         </div>
