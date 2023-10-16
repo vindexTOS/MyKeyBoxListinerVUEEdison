@@ -48,16 +48,16 @@ export default {
     this.$el.addEventListener('touchstart', () => this.countdown = this.initial_countdown)
     this.$el.addEventListener('touchmove', () => this.countdown = this.initial_countdown)
 
-    // setInterval(() => {
-    //     this.countdown = this.countdown - 1
-    //     if (this.countdown <= 0) {
-    //       if (this.$route.name === 'home') {
-    //         window.location.href = '/'
-    //       } else {
-    //         this.countdown = this.initial_countdown
-    //       }
-    //     }
-    // }, 1000)
+    setInterval(() => {
+        this.countdown = this.countdown - 1
+        if (this.countdown <= 0) {
+          if (this.$route.name === 'home') {
+            window.location.href = '/'
+          } else {
+            this.countdown = this.initial_countdown
+          }
+        }
+    }, 1000)
   },
 }
 </script>
