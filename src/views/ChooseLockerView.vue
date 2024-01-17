@@ -50,7 +50,7 @@ export default {
   computed: {},
   methods: {
     loadBoxes() {
-      this.$axios.get('api/proxy/GetBoxes').then((response) => {
+      this.$axios.get('api/GetBoxes').then((response) => {
         this.boxes = response.data
       })
     },
@@ -114,10 +114,10 @@ export default {
       }, timeout)
     },
     setOrderStatus(box_id, status_id) {
-      return this.$axios.post(`api/proxy/SetOrderStatus?boxId=${box_id}&statusId=${status_id}`)
+      return this.$axios.post(`api/SetOrderStatus?boxId=${box_id}&statusId=${status_id}`)
     },
     setBoxForOrder(box_id, order_id) {
-      return this.$axios.post(`api/proxy/SetOrderBoxId/?orderId=${order_id}&boxId=${box_id}`)
+      return this.$axios.post(`api/SetOrderBoxId/?orderId=${order_id}&boxId=${box_id}`)
     },
   },
 }

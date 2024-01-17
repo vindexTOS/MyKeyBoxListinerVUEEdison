@@ -220,7 +220,7 @@ export default {
     checkCode() {
       if (!this.checkCodeDisabled) {
         this.checking = true;
-        this.$axios.get(`api/proxy/GetOrderByCode?Code=${this.type}:${this.code}`).then((response) => {
+        this.$axios.get(`api/GetOrderByCode?Code=${this.type}:${this.code}`).then((response) => {
           if (
               response.data &&
               response.data.orderStatus &&

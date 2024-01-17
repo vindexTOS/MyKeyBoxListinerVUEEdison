@@ -51,7 +51,7 @@ export default {
   computed: {},
   methods: {
     loadBoxes() {
-      this.$axios.get('api/proxy/GetBoxes').then((response) => {
+      this.$axios.get('api/GetBoxes').then((response) => {
         this.boxes = response.data
         this.box_index = this.getCurrentBoxIndex()
         this.box_id = this.boxes[this.box_index].boxId
@@ -115,7 +115,7 @@ export default {
     },
 
     apiSetOrderStatus(status_id) {
-      return this.$axios.post(`api/proxy/SetOrderStatus?boxId=${this.box_id}&statusId=${status_id}`)
+      return this.$axios.post(`api/SetOrderStatus?boxId=${this.box_id}&statusId=${status_id}`)
     },
     deviceOpenTheDoor(index) {
       return this.$axios.get('api/open/' + index)

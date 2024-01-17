@@ -38,7 +38,7 @@ const app = new Vue({
 app.$mount('#app')
 
 let loadRules = () => {
-  app.$axios.get('api/proxy/GetRules').then((response) => {
+  app.$axios.get('api/GetRules').then((response) => {
     store.commit('setRules', response.data && response.data.message ? response.data.message : '')
   })
 }
