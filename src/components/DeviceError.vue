@@ -126,8 +126,8 @@ export default {
       this.$router.push({name: 'home'})
     },
     checkServer() {
-      this.$axios.get('/').then((response) => {
-        if (response.data === 'up') {
+      this.$axios.get('/check').then((response) => {
+        if (response.status === 200 && Array.isArray(response.data.closed_doors)) {
           if (this.shown) {
             this.closePopup()
           }
