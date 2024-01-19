@@ -11,20 +11,34 @@
 
 <style scoped lang="scss">
 .cube {
-  width: 854px;
-  height: 532px;
+  width: 1277px;
+  height: 797px;
   //border: 1px solid red; // Only for testing
   position: absolute;
-  left: 0;
+  left: -1px;
+  top: 3px;
   right: 0;
-  top: 0;
   margin: auto;
 }
 
 :global(body) {
   overflow: hidden;
+  user-select: none;
 }
 
+/* Add styles for the tap effect */
+:global(.ripple) {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: rippleAnimation 0.2s linear;
+  background-color: var(--color-main);
+  pointer-events: none;
+  opacity: 0.2;
+  width: 10px;
+  height: 10px;
+  z-index: 100000;
+}
 </style>
 
 <script setup lang="ts">
@@ -84,27 +98,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-/* Add your global styles here */
-body {
-  /* Prevent text selection on double-click */
-  user-select: none;
-}
-
-/* Add styles for the tap effect */
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: rippleAnimation 0.2s linear;
-  background-color: var(--color-main);
-  pointer-events: none;
-  opacity: 0.2;
-  width: 7px;
-  height: 7px;
-  z-index: 100000;
-}
-
+<style>
 @keyframes rippleAnimation {
   to {
     transform: scale(4);
