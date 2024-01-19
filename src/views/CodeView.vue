@@ -337,7 +337,7 @@ export default {
   justify-content: center;
 
   div {
-    cursor: pointer;
+    //cursor: pointer;
     flex: calc(31% - 5px);
     margin: 5px;
     border-radius: 13px;
@@ -403,7 +403,7 @@ export default {
   position: relative;
   padding-left: 35px;
   margin-bottom: 12px;
-  cursor: pointer;
+  //cursor: pointer;
   font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -415,7 +415,7 @@ export default {
 .checkbox-wrapper input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
+  //cursor: pointer;
   height: 0;
   width: 0;
 }
