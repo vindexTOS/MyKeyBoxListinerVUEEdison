@@ -58,6 +58,57 @@ export default {
           }
         }
     }, 1000)
+
+    // Hide the cursor on page load
+    document.body.style.cursor = 'none';
+
+    // Add tap effect to the body or specific clickable elements
+    document.body.addEventListener('click', this.handleTapEffect);
+  },
+  methods: {
+    handleTapEffect(event) {
+      // Implement your tap effect logic here
+      // For example, you can add a ripple effect to the clicked element
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = `${event.clientX}px`;
+      ripple.style.top = `${event.clientY}px`;
+      document.body.appendChild(ripple);
+
+      // Remove the ripple element after a short delay
+      setTimeout(() => {
+        ripple.remove();
+      }, 200);
+    },
   },
 }
 </script>
+
+<style lang="scss">
+/* Add your global styles here */
+body {
+  /* Prevent text selection on double-click */
+  user-select: none;
+}
+
+/* Add styles for the tap effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: rippleAnimation 0.2s linear;
+  background-color: var(--color-main);
+  pointer-events: none;
+  opacity: 0.2;
+  width: 7px;
+  height: 7px;
+  z-index: 100000;
+}
+
+@keyframes rippleAnimation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+</style>
