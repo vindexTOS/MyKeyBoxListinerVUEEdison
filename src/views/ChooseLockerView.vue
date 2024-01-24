@@ -59,8 +59,8 @@ export default {
     },
     selectBox(index) {
       if (this.boxIsAvailable(index)) {
-        this.$axios.get('api/open/' + index).then((response) => {
-          if (response.status === 200 && response.data.doorId === index) {
+        this.$axios.get('open/' + index).then((response) => {
+          if (response.status === 200) {
             let order_id = this.$route.query.order_id
             let box_id = this.boxes[index].boxId
             this.setBoxForOrder(box_id, order_id).then((response) => {
@@ -87,7 +87,7 @@ export default {
       this.$router.push({name: 'close-the-door'})
       let checkDoorCloseInterval = null;
       checkDoorCloseInterval = setInterval(() => {
-        this.$axios.get('api/status').then((response) => {
+        this.$axios.get('/check').then((response) => {
           if (response.status === 200 && response.data && response.data.doors && Array.isArray(response.data.doors) && response.data.doors.length > index) {
             if (response.data.doors[index] === 1) {
               clearInterval(checkDoorCloseInterval)
@@ -100,7 +100,7 @@ export default {
     showToPutTheKeyAndDoTheLogic(index, box_id, timeout = 8000) {
       this.$router.push({name: 'key-with-text', query: {text: 'Please put the key and<br>close the door'}})
       setTimeout(() => {
-        this.$axios.get('api/status').then((response) => {
+        this.$axios.get('/check').then((response) => {
           if (response.status === 200 && response.data && response.data.doors && Array.isArray(response.data.doors) && response.data.doors.length > index) {
             if (response.data.doors[index] !== 1) {
               this.showCloseDoorAndStartInterval(index, box_id)
@@ -140,11 +140,11 @@ export default {
       padding-left: 150px;
 
       .text-block {
-        font-size: 26px;
-        width: 270px;
+        font-size: 40px;
+        width: 450px;
 
         .choose-locker-hint {
-          font-size: 18px;
+          font-size: 25px;
         }
 
         .green {
@@ -155,24 +155,25 @@ export default {
 
     .lockers-wrapper {
       width: 50%;
-      height: 490px;
+      height: 750px;
       overflow: hidden;
 
       .lockers-grid {
-        margin-left: 65px;
+        margin-left: 150px;
         display: grid;
-        grid-template-columns: 90px 90px;
-        gap: 10px;
+        grid-template-columns: 150px 150px;
+        gap: 16px;
 
         .item {
           background-color: #363636;
           color: rgba(256, 256, 256, 0.3);
           width: 90px;
-          height: 40px;
+          height: 60px;
           border-radius: 5px;
           display: flex;
           justify-content: center;
           align-items: center;
+          font-size: 35px;
 
           border: 2px solid rgba(0, 0, 0, 0);
 

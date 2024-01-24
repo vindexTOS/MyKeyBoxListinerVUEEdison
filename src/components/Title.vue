@@ -4,8 +4,8 @@
 
 <style scoped>
 .title {
-    font-size: 42px;
-    margin-top: 20px;
+    font-size: 70px;
+    margin-top: 30px;
     line-height: 1;
 }
 </style>

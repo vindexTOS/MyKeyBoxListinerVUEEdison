@@ -45,12 +45,12 @@ export default {
   computed: {},
   methods: {
     loadBoxes() {
-      this.$axios.get('api/status').then((response) => {
+      this.$axios.get('/check').then((response) => {
         this.boxes = response.data.doors
       })
     },
     deviceOpenTheDoor(index) {
-      return this.$axios.get('api/open/' + index)
+      return this.$axios.get('/open/' + index)
     },
   },
 }

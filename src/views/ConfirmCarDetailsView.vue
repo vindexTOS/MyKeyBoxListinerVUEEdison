@@ -66,7 +66,7 @@ export default {
   background-color: #363636;
   margin: 30px auto;
   width: 500px;
-  height: 250px;
+  height: 470px;
   padding: 30px;
   border-radius: 20px;
 
@@ -80,11 +80,11 @@ export default {
     padding-right: 5px;
 
     h3 {
-      font-size: 18px;
+      font-size: 30px;
     }
 
     div {
-      font-size: 13px;
+      font-size: 25px;
     }
 
   }

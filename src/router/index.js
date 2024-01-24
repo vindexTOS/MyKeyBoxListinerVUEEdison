@@ -17,11 +17,11 @@ const router = new VueRouter({
   mode: 'history',
   base: import.meta.env.BASE_URL,
   routes: [
-    {
-      path: '/lockers-tester',
-      name: 'lockers-tester',
-      component: TestOpenAllBoxes,
-    },
+    // {
+    //   path: '/lockers-tester',
+    //   name: 'lockers-tester',
+    //   component: TestOpenAllBoxes,
+    // },
     {
       path: '/',
       name: 'home',

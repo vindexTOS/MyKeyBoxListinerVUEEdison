@@ -40,7 +40,6 @@ app.$mount('#app')
 let loadRules = () => {
   app.$axios.get('api/GetRules').then((response) => {
     store.commit('setRules', response.data && response.data.message ? response.data.message : '')
-    console.log('moida:', response.data && response.data.message ? response.data.message : '')
   })
 }
 setInterval(loadRules, 60 * 1000)

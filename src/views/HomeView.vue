@@ -1,6 +1,6 @@
 <template>
     <section class="homepage">
-        <div class="welcome text-center color-white font-montserrat">Welcome to to</div>
+        <div class="welcome text-center color-white font-montserrat">Welcome to</div>
         <div class="mykeybox text-center color-main font-russo-one">MyKeyBox</div>
         <div class="flex-center-container">
             <router-link :to="{name: 'code'}" class="press-to-start font-montserrat">Press to start</router-link>
@@ -13,21 +13,21 @@
   height: 100vh;
 
   .welcome {
-    margin-top: 50px;
-    font-size: 45px;
+    margin-top: 70px;
+    font-size: 70px;
   }
 
   .mykeybox {
-    font-size: 128px;
+    font-size: 170px;
   }
 
   .press-to-start {
     color: var(--color-dark);
     background-color: var(--color-main);
     border-radius: 34px;
-    font-size: 28px;
+    font-size: 50px;
     padding: 28px 48px;
-    margin-top: 50px;
+    margin-top: 70px;
   }
 }
 </style>

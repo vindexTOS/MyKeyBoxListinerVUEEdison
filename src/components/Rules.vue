@@ -72,7 +72,7 @@
   background-color: #363636;
   margin: 30px auto;
   width: 500px;
-  height: 360px;
+  height: 580px;
   padding: 15px;
   border-radius: 20px;
 
@@ -82,11 +82,11 @@
     padding-right: 5px;
 
     h2 {
-      font-size: 23px;
+      font-size: 30px;
     }
 
     div {
-      font-size: 13px;
+      font-size: 20px;
     }
 
     &::-webkit-scrollbar {
@@ -117,6 +117,7 @@
   justify-content: space-between;
   width: 80%;
   margin: auto;
+  font-size: 20px;
 }
 </style>
 

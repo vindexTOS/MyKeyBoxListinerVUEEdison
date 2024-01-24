@@ -122,7 +122,7 @@
         <div class="font-montserrat color-white transition delete"
              v-bind:class="{disabled: code.length === 0 || checking}"
              @click="removeCharacter">
-          <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="55" height="55" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_120_470)">
               <path
                   d="M26.6669 13.3333C26.3544 13.0209 25.9305 12.8453 25.4886 12.8453C25.0466 12.8453 24.6228 13.0209 24.3102 13.3333L20.0002 17.6433L15.6902 13.3333C15.3759 13.0297 14.9549 12.8617 14.5179 12.8655C14.0809 12.8693 13.6629 13.0446 13.3539 13.3536C13.0449 13.6626 12.8696 14.0807 12.8658 14.5176C12.862 14.9546 13.03 15.3756 13.3336 15.69L17.6436 20L13.3336 24.31C13.03 24.6243 12.862 25.0453 12.8658 25.4823C12.8696 25.9193 13.0449 26.3374 13.3539 26.6464C13.6629 26.9554 14.0809 27.1307 14.5179 27.1345C14.9549 27.1383 15.3759 26.9703 15.6902 26.6667L20.0002 22.3567L24.3102 26.6667C24.6246 26.9703 25.0456 27.1383 25.4826 27.1345C25.9196 27.1307 26.3376 26.9554 26.6466 26.6464C26.9556 26.3374 27.1309 25.9193 27.1347 25.4823C27.1385 25.0453 26.9705 24.6243 26.6669 24.31L22.3569 20L26.6669 15.69C26.9794 15.3774 27.1549 14.9536 27.1549 14.5117C27.1549 14.0697 26.9794 13.6459 26.6669 13.3333Z"
@@ -145,7 +145,7 @@
              v-bind:class="{disabled: checkCodeDisabled || checking}"
              @click="checkCode"
         >
-          <svg width="30" height="30" viewBox="0 0 40 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="50" height="50" viewBox="0 0 40 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M40 16.9861C39.9861 15.4944 39.3804 14.0683 38.3143 13.0166L26.0571 0.824507C25.5218 0.296416 24.7977 0 24.0429 0C23.288 0 22.5639 0.296416 22.0286 0.824507C21.7608 1.08809 21.5482 1.40169 21.4032 1.7472C21.2581 2.09272 21.1834 2.46332 21.1834 2.83762C21.1834 3.21193 21.2581 3.58253 21.4032 3.92804C21.5482 4.27356 21.7608 4.58715 22.0286 4.85074L31.4286 14.1508H2.85714C2.09938 14.1508 1.37266 14.4495 0.836838 14.9812C0.30102 15.513 0 16.2342 0 16.9861C0 17.7381 0.30102 18.4593 0.836838 18.9911C1.37266 19.5228 2.09938 19.8215 2.85714 19.8215H31.4286L22.0286 29.1499C21.4906 29.6801 21.1868 30.4006 21.1841 31.153C21.1814 31.9054 21.4801 32.6281 22.0143 33.162C22.5485 33.6959 23.2746 33.9973 24.0328 34C24.7909 34.0026 25.5191 33.7063 26.0571 33.1761L38.3143 20.984C39.3874 19.9254 39.9936 18.4877 40 16.9861Z"
                 fill="#0D0D0D"/>
@@ -269,7 +269,7 @@ export default {
   margin-top: 10px;
 
   .color-white, .color-main {
-    font-size: 20px;
+    font-size: 30px;
   }
 }
 
@@ -290,13 +290,13 @@ export default {
 
   .code-wrapper input, input.type {
     pointer-events: none;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     background-color: #363636;
     border-radius: 12px;
     color: white;
     border: 3px solid rgba(0, 0, 0, 0);
-    font-size: 26px;
+    font-size: 40px;
     margin: 4px;
 
     &.invalid {
@@ -326,13 +326,14 @@ export default {
 }
 
 .message {
-  height: 30px;
+  height: 55px;
+  font-size: 30px;
 }
 
 .keyboard {
   display: flex;
   flex-wrap: wrap;
-  width: 320px;
+  width: 440px;
   margin: auto;
   justify-content: center;
 
@@ -341,14 +342,14 @@ export default {
     flex: calc(31% - 5px);
     margin: 5px;
     border-radius: 13px;
-    font-size: 30px;
+    font-size: 50px;
     text-align: center;
-    height: 45px;
+    height: 70px;
     background-color: #363636;
     padding: 8px 8px;
-    line-height: 30px;
-    min-width: 80px;
-    max-width: 80px;
+    line-height: 60px;
+    min-width: 110px;
+    max-width: 110px;
 
     &.enter {
       background-color: var(--color-main);
@@ -378,12 +379,15 @@ export default {
 }
 
 .terms {
+  margin-top: 30px;
   .regular {
     color: rgba(256, 256, 256, 0.65);
+    font-size: 25px;
   }
 
   .link {
     text-decoration: underline;
+    font-size: 30px;
   }
 }
 
@@ -393,7 +397,7 @@ export default {
   border-radius: 24px;
   font-size: 28px;
   padding: 18px 48px;
-  margin-top: 30px;
+  margin-top: 100px;
 }
 
 
@@ -401,7 +405,7 @@ export default {
 .checkbox-wrapper {
   display: block;
   position: relative;
-  padding-left: 35px;
+  padding-left: 70px;
   margin-bottom: 12px;
   //cursor: pointer;
   font-size: 22px;
@@ -425,8 +429,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 45px;
+  width: 45px;
   background-color: #eee;
 }
 
@@ -446,17 +450,17 @@ export default {
 .checkbox-wrapper input:checked ~ .checkmark:after {
   display: block;
   border-color: var(--color-dark);
-  border-width: 0 2px 2px 0;
+  border-width: 0 4px 4px 0;
   transform: scale(1.8) rotate(45deg);
-  width: 6px;
+  width: 10px;
 }
 
 /* Style the checkmark/indicator */
 .checkbox-wrapper .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
+  left: 15px;
+  top: 10px;
+  width: 9px;
+  height: 18px;
   border: solid white;
   border-width: 0 3px 3px 0;
   -webkit-transform: rotate(45deg);

@@ -25,10 +25,10 @@ export default {
 
 <style lang="scss" scoped>
 .text {
-  font-size: 36px;
+  font-size: 60px;
   text-align: center;
   color: #FE0101;
-  margin-top: calc(50% - 65px);
+  margin-top: calc(50% - 160px);
   font-weight: 900;
 }
 </style>

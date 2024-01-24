@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .text {
-  font-size: 36px;
+  font-size: 100px;
   text-align: center;
   margin-top: 170px;
   font-weight: 900;
