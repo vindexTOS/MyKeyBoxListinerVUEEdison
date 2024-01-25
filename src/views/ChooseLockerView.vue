@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="lockers-wrapper">
+        <div class="lockers-wrapper" ref="lockersWrapper">
           <div class="lockers-grid">
             <div
                 class="item font-montserrat"
@@ -33,7 +33,6 @@
 
 <script setup>
 import Back from "@/components/Back.vue"
-import Title from "@/components/Title.vue"
 import Rules from "@/components/Rules.vue";
 </script>
 
@@ -42,6 +41,9 @@ export default {
   data() {
     return {
       boxes: [],
+
+      box_id: null,
+      order_id: null,
     }
   },
   mounted() {
@@ -54,36 +56,61 @@ export default {
         this.boxes = response.data
       })
     },
+    dimBoxSelector() {
+      this.$refs.lockersWrapper.classList.add('dimmed')
+    },
+    undoDimBoxSelector() {
+      this.$refs.lockersWrapper.classList.remove('dimmed')
+    },
     boxIsAvailable(index) {
-      return this.boxes[index].boxStatus === 'Free'
+      return this.boxes[index] && this.boxes[index].boxStatus === 'Free'
     },
     selectBox(index) {
       if (this.boxIsAvailable(index)) {
+        this.order_id = this.$route.query.order_id
+        this.box_id = this.boxes[index].boxId
+
+        this.dimBoxSelector()
+        let alertAndUndoDim = (message) => {
+          alert(message)
+          this.undoDimBoxSelector()
+        }
+
         this.$axios.get('open/' + index).then((response) => {
           if (response.status === 200) {
-            let order_id = this.$route.query.order_id
-            let box_id = this.boxes[index].boxId
-            this.setBoxForOrder(box_id, order_id).then((response) => {
+            this.setBoxForOrder().then((response) => {
               if (response.status === 200) { // Box assigned to order
-                this.setOrderStatus(box_id, 2).then((response) => { // Open but not closed by dealer
+                this.setOrderStatus(2).then((response) => { // Open but not closed by dealer
                   if (response.status === 200) { // Box assigned to order
-                    this.showToPutTheKeyAndDoTheLogic(index, box_id)
+                    this.showToPutTheKeyAndDoTheLogic(index)
+                  } else {
+                    alertAndUndoDim('ERROR: can\t set order status (s)!')
                   }
+                }, () => {
+                  alertAndUndoDim('ERROR: can\t set order status!')
                 })
+              } else {
+                alertAndUndoDim('ERROR: box can\t be assigned to order (s)!')
               }
+            }, () => {
+              alertAndUndoDim('ERROR: box can\t be assigned to order!')
             })
+          } else {
+            alertAndUndoDim('ERROR: door can\'t be opened (s)!')
           }
+        }, () => {
+          alertAndUndoDim('ERROR: door can\'t be opened!')
         })
       }
     },
-    showThankYou(box_id, timeout = 5000) {
-      this.setOrderStatus(box_id, 3) // Door closed  by dealer, key in box
+    showThankYou(timeout = 5000) {
+      this.setOrderStatus(3) // Door closed  by dealer, key in box
       this.$router.push({name: 'thank-you'})
       setTimeout(() => {
         this.$router.push({name: 'home'})
       }, timeout)
     },
-    showCloseDoorAndStartInterval(index, box_id, interval = 1000) {
+    showCloseDoorAndStartInterval(index, interval = 1000) {
       this.$router.push({name: 'close-the-door'})
       let checkDoorCloseInterval = null;
       checkDoorCloseInterval = setInterval(() => {
@@ -91,21 +118,21 @@ export default {
           if (response.status === 200 && response.data && response.data.doors && Array.isArray(response.data.doors) && response.data.doors.length > index) {
             if (response.data.doors[index] === 1) {
               clearInterval(checkDoorCloseInterval)
-              this.showThankYou(box_id)
+              this.showThankYou()
             }
           }
         })
       }, interval)
     },
-    showToPutTheKeyAndDoTheLogic(index, box_id, timeout = 8000) {
+    showToPutTheKeyAndDoTheLogic(index, timeout = 8000) {
       this.$router.push({name: 'key-with-text', query: {text: 'Please put the key and<br>close the door'}})
       setTimeout(() => {
         this.$axios.get('/check').then((response) => {
           if (response.status === 200 && response.data && response.data.doors && Array.isArray(response.data.doors) && response.data.doors.length > index) {
             if (response.data.doors[index] !== 1) {
-              this.showCloseDoorAndStartInterval(index, box_id)
+              this.showCloseDoorAndStartInterval(index)
             } else {
-              this.showThankYou(box_id)
+              this.showThankYou()
             }
           }
         }, () => {
@@ -113,11 +140,11 @@ export default {
         })
       }, timeout)
     },
-    setOrderStatus(box_id, status_id) {
-      return this.$axios.post(`api/SetOrderStatus?boxId=${box_id}&statusId=${status_id}`)
+    setOrderStatus(status_id) {
+      return this.$axios.post(`api/SetOrderStatus?orderId=${this.order_id}&boxId=${this.box_id}&statusId=${status_id}`)
     },
-    setBoxForOrder(box_id, order_id) {
-      return this.$axios.post(`api/SetOrderBoxId/?orderId=${order_id}&boxId=${box_id}`)
+    setBoxForOrder() {
+      return this.$axios.post(`api/SetOrderBoxId/?orderId=${this.order_id}&boxId=${this.box_id}`)
     },
   },
 }
@@ -157,6 +184,9 @@ export default {
       width: 50%;
       height: 750px;
       overflow: hidden;
+      &.dimmed {
+        opacity: 0.1;
+      }
 
       .lockers-grid {
         margin-left: 150px;

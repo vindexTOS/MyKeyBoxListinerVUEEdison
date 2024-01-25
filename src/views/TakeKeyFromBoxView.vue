@@ -43,6 +43,7 @@ export default {
 
       box_index: null,
       box_id: null,
+      order_id: null,
     }
   },
   mounted() {
@@ -51,6 +52,7 @@ export default {
   computed: {},
   methods: {
     loadBoxes() {
+      this.order_id = this.$route.query.order_id
       this.$axios.get('api/GetBoxes').then((response) => {
         this.boxes = response.data
         this.box_index = this.getCurrentBoxIndex()
@@ -61,10 +63,20 @@ export default {
             this.apiSetOrderStatus(4).then((response) => {
               if (response.status === 200) {
                 this.setTimeoutAndInterval()
+              } else {
+                alert('ERROR: can\t set order status (s)!')
               }
+            }, () => {
+              alert('ERROR: can\t set order status!')
             })
+          } else {
+            alert('ERROR: can\t open the door (s)!')
           }
+        }, () => {
+          alert('ERROR: can\t open the door!')
         })
+      }, () => {
+        alert('ERROR: can\t get boxes from server!')
       })
     },
     isCurrentBox(index) {
@@ -115,7 +127,7 @@ export default {
     },
 
     apiSetOrderStatus(status_id) {
-      return this.$axios.post(`api/SetOrderStatus?boxId=${this.box_id}&statusId=${status_id}`)
+      return this.$axios.post(`api/SetOrderStatus?orderId=${this.order_id}&boxId=${this.box_id}&statusId=${status_id}`)
     },
     deviceOpenTheDoor(index) {
       return this.$axios.get('/open/' + index)
