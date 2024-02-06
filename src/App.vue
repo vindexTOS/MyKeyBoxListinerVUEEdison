@@ -26,6 +26,10 @@
   user-select: none;
 }
 
+:global(*) {
+  cursor: none;
+}
+
 /* Add styles for the tap effect */
 :global(.ripple) {
   position: absolute;
@@ -74,7 +78,7 @@ export default {
     }, 1000)
 
     // Hide the cursor on page load
-    document.body.style.cursor = 'none';
+    // document.body.style.cursor = 'none';
 
     // Add tap effect to the body or specific clickable elements
     document.body.addEventListener('click', this.handleTapEffect);

@@ -148,6 +148,12 @@ export default {
     },
     openPopup() {
       this.shown = true
+      this.$axios.get('api/GetRules').then((response) => {
+        let newRules = response.data && response.data.message ? response.data.message : ''
+        if (newRules) {
+          this.$store.commit('setRules', newRules)
+        }
+      })
     },
   },
 }
