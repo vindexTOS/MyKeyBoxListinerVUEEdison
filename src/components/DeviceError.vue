@@ -1,5 +1,6 @@
 <template>
   <div class="transition popup" v-bind:class="{shown: shown, 'force-zindex': force_zindex, 'd-none': !shown}">
+    <DeviceCode/>
     <div>
       <Title/>
       <div class="rules-wrapper color-white">
@@ -99,9 +100,10 @@
 <script>
 import Title from "@/components/Title.vue";
 import Back from "@/components/Back.vue";
+import DeviceCode from "@/components/DeviceCode.vue";
 
 export default {
-  components: {Back, Title},
+  components: {DeviceCode, Back, Title},
   data() {
     return {
       shown: false,

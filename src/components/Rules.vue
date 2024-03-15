@@ -1,6 +1,7 @@
 <template>
   <div v-if="back">
     <div class="transition popup" v-bind:class="{shown: shown, 'force-zindex': force_zindex}">
+      <DeviceCode/>
       <div>
         <Back :to="{name: 'home'}" :click="closePopup"/>
         <Title/>
@@ -124,9 +125,10 @@
 <script>
 import Title from "@/components/Title.vue";
 import Back from "@/components/Back.vue";
+import DeviceCode from "@/components/DeviceCode.vue";
 
 export default {
-  components: {Back, Title},
+  components: {DeviceCode, Back, Title},
   props: {
     back: Object,
   },

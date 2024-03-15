@@ -1,5 +1,6 @@
 <template>
     <section class="homepage">
+        <DeviceCode/>
         <div class="welcome text-center color-white font-montserrat">Welcome to</div>
         <div class="mykeybox text-center color-main font-russo-one">MyKeyBox</div>
         <div class="flex-center-container">
@@ -31,3 +32,6 @@
   }
 }
 </style>
+<script setup>
+import DeviceCode from "@/components/DeviceCode.vue";
+</script>

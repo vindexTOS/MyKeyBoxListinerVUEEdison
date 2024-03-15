@@ -15,12 +15,16 @@ const store = new Vuex.Store({
   state() {
     return {
       rules: '',
+      unique_code: '',
     }
   },
   mutations: {
     setRules(state, rules) {
       state.rules = rules
-    }
+    },
+    setCode(state, unique_code) {
+      state.unique_code = unique_code
+    },
   }
 });
 
@@ -34,6 +38,10 @@ const app = new Vue({
 
 
 // app.config.globalProperties.$axios = axios;
+
+app.$axios.get('device_code').then((response) => {
+  store.commit('setCode', response.data && response.data.code ? response.data.code : '')
+})
 
 app.$mount('#app')
 
