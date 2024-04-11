@@ -3,7 +3,7 @@
     <Rules :back="{name: 'code'}" ref="rules"/>
     <Title/>
     <div class="text font-montserrat">
-      PLEASE CLOSE THE DOOR
+      {{ $helper.trans('message_please_close_the_door_red') }}
     </div>
   </section>
 </template>

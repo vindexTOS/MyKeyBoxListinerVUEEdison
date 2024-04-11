@@ -7,15 +7,15 @@
         <Title/>
         <div class="rules-wrapper color-white">
           <div class="rules-block">
-            <h2 class="font-russo-one">Terms And Conditions</h2>
+            <h2 class="font-russo-one">{{ $helper.trans('terms_and_conditions_title') }}</h2>
             <div class="font-montserrat-regular" v-html="$store.state.rules"/>
           </div>
         </div>
         <div class="footer-contact font-montserrat color-white">
-          <div>Saburtalo, St. Kazbegi 23</div>
-          <div>+995 551 545 716</div>
-          <div>Mykeybox.com</div>
-          <div>help@mykeybox.com</div>
+          <div>{{ $helper.trans('contact_address') }}</div>
+          <div>{{ $helper.trans('contact_phone') }}</div>
+          <div>{{ $helper.trans('contact_domain') }}</div>
+          <div>{{ $helper.trans('contact_email') }}</div>
         </div>
       </div>
     </div>

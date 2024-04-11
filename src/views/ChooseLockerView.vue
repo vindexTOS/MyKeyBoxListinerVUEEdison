@@ -7,10 +7,10 @@
         <div class="text-wrapper">
           <div class="text-block color-white">
             <div class="choose-locker-text font-montserrat">
-              Choose locker to save the key
+              {{ $helper.trans('choose_locker_title') }}
             </div>
             <div class="choose-locker-hint font-montserrat-regular">
-              Only <span class="green">Green</span> lockers are empty
+              {{ $helper.trans('choose_locker_secondary_title_white_start') }} <span class="green">{{ $helper.trans('choose_locker_secondary_title_green') }}</span> {{ $helper.trans('choose_locker_secondary_title_white_end') }}
             </div>
           </div>
         </div>
@@ -84,22 +84,22 @@ export default {
                   if (response.status === 200) { // Box assigned to order
                     this.showToPutTheKeyAndDoTheLogic(index)
                   } else {
-                    alertAndUndoDim('ERROR: can\t set order status (s)!')
+                    alertAndUndoDim(this.$helper.trans('server_error_cant_set_order_status') + ' (s)')
                   }
                 }, () => {
-                  alertAndUndoDim('ERROR: can\t set order status!')
+                  alertAndUndoDim(this.$helper.trans('server_error_cant_set_order_status'))
                 })
               } else {
-                alertAndUndoDim('ERROR: box can\t be assigned to order (s)!')
+                alertAndUndoDim(this.$helper.trans('server_error_box_cant_be_assigned_to_order') + ' (s)')
               }
             }, () => {
-              alertAndUndoDim('ERROR: box can\t be assigned to order!')
+              alertAndUndoDim(this.$helper.trans('server_error_box_cant_be_assigned_to_order'))
             })
           } else {
-            alertAndUndoDim('ERROR: door can\'t be opened (s)!')
+            alertAndUndoDim(this.$helper.trans('server_error_door_cant_be_opened') + ' (s)')
           }
         }, () => {
-          alertAndUndoDim('ERROR: door can\'t be opened!')
+          alertAndUndoDim(this.$helper.trans('server_error_door_cant_be_opened'))
         })
       }
     },
@@ -125,7 +125,7 @@ export default {
       }, interval)
     },
     showToPutTheKeyAndDoTheLogic(index, timeout = 8000) {
-      this.$router.push({name: 'key-with-text', query: {text: 'Please put the key and<br>close the door'}})
+      this.$router.push({name: 'key-with-text', query: {text: `${this.$helper.trans('message_put_the_key_line_1')}<br>${this.$helper.trans('message_put_the_key_line_2')}`}})
       setTimeout(() => {
         this.$axios.get('/check').then((response) => {
           if (response.status === 200 && response.data && response.data.doors && Array.isArray(response.data.doors) && response.data.doors.length > index) {

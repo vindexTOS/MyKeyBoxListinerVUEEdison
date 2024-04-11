@@ -1,10 +1,10 @@
 <template>
     <section class="homepage">
         <DeviceCode/>
-        <div class="welcome text-center color-white font-montserrat">Welcome to</div>
-        <div class="mykeybox text-center color-main font-russo-one">MyKeyBox</div>
+        <div class="welcome text-center color-white font-montserrat">{{ $helper.trans('home_screen_welcome_to') }}</div>
+        <div class="mykeybox text-center color-main font-russo-one">{{ $helper.trans('home_screen_mykeybox') }}</div>
         <div class="flex-center-container">
-            <router-link :to="{name: 'code'}" class="press-to-start font-montserrat">Press to start</router-link>
+            <router-link :to="{name: 'code'}" class="press-to-start font-montserrat">{{ $helper.trans('home_screen_press_to_start') }}</router-link>
         </div>
     </section>
 </template>

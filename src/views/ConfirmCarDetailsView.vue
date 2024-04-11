@@ -6,17 +6,17 @@
 
     <div class="box-wrapper color-white">
       <div class="block">
-        <h3 class="font-russo-one">Color</h3>
+        <h3 class="font-russo-one">{{ $helper.trans('confirm_car_details_color') }}</h3>
         <div class="font-montserrat-regular">{{ $route.query.color ? $route.query.color : '-' }}</div>
-        <h3 class="font-russo-one mt-2">VIN Code</h3>
+        <h3 class="font-russo-one mt-2">{{ $helper.trans('confirm_car_details_vin_code') }}</h3>
         <div class="font-montserrat-regular">{{ $route.query.vin ? $route.query.vin : '-' }}</div>
-        <h3 class="font-russo-one mt-2">Type</h3>
+        <h3 class="font-russo-one mt-2">{{ $helper.trans('confirm_car_details_type') }}</h3>
         <div class="font-montserrat-regular">{{ $route.query.vehicle ? $route.query.vehicle : '-' }}</div>
       </div>
     </div>
     <div class="buttons">
-      <button class="reject font-montserrat pointer" @click="back">Reject</button>
-      <button class="confirm font-montserrat pointer" @click="confirm">Confirm</button>
+      <button class="reject font-montserrat pointer" @click="back">{{ $helper.trans('confirm_car_details_reject') }}</button>
+      <button class="confirm font-montserrat pointer" @click="confirm">{{ $helper.trans('confirm_car_details_confirm') }}</button>
     </div>
   </section>
 </template>

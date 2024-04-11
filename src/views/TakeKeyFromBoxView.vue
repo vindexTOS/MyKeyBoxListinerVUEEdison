@@ -7,9 +7,9 @@
         <div class="text-wrapper">
           <div class="text-block color-white">
             <div class="font-montserrat">
-              Take key from<br/>
-              <span class="color-main">Yellow</span> box and<br/>
-              close the door
+              {{ $helper.trans('message_take_key_from_yellow_box_line_1') }}<br/>
+              <span class="color-main">{{ $helper.trans('message_take_key_from_yellow_box_line_2_yellow') }}</span> {{ $helper.trans('message_take_key_from_yellow_box_line_2_white') }}<br/>
+              {{ $helper.trans('message_take_key_from_yellow_box_line_3') }}
             </div>
           </div>
         </div>
@@ -64,19 +64,19 @@ export default {
               if (response.status === 200) {
                 this.setTimeoutAndInterval()
               } else {
-                alert('ERROR: can\t set order status (s)!')
+                alert(this.$helper.trans('server_error_cant_set_order_status') + ' (s)')
               }
             }, () => {
-              alert('ERROR: can\t set order status!')
+              alert(this.$helper.trans('server_error_cant_set_order_status'))
             })
           } else {
-            alert('ERROR: can\t open the door (s)!')
+            alert(this.$helper.trans('server_error_door_cant_be_opened') + ' (s)')
           }
         }, () => {
-          alert('ERROR: can\t open the door!')
+          alert(this.$helper.trans('server_error_door_cant_be_opened'))
         })
       }, () => {
-        alert('ERROR: can\t get boxes from server!')
+        alert(this.$helper.trans('server_error_cant_get_boxes_from_server'))
       })
     },
     isCurrentBox(index) {

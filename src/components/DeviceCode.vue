@@ -1,6 +1,6 @@
 <template>
   <div class="unique-code font-russo-one">
-    <span class="code-title color-white">Device: </span>
+    <span class="code-title color-white">{{ $helper.trans('header_device_code') }} </span>
     <span class="code color-main">{{ $store.state.unique_code }}</span>
   </div>
 </template>

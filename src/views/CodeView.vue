@@ -4,8 +4,8 @@
     <Rules :back="{name: 'code'}" ref="rules"/>
     <Title/>
     <div class="enter-code-text-wrapper text-center font-montserrat">
-      <span class="color-white">Please Enter Your </span>
-      <span class="color-main">6 Digit Code</span>
+      <span class="color-white">{{ $helper.trans('code_page_please_enter_your_white') }} </span>
+      <span class="color-main">{{ $helper.trans('code_page_6_digit_code_yellow') }}</span>
     </div>
 
     <div class="code-container">
@@ -66,16 +66,16 @@
 
     <div class="message text-center font-montserrat">
       <div class="invalid" v-if="invalid">
-        Pin code is incorrect. Try again
+        {{ $helper.trans('code_page_pin_code_is_incorrect') }}
       </div>
       <div class="valid" v-if="valid">
-        Your pin code is correct!
+        {{ $helper.trans('code_page_pin_code_is_correct') }}
       </div>
     </div>
 
     <template v-if="invalid">
       <div class="flex-center-container">
-        <a class="try-again font-montserrat pointer" @click="tryAgain">Try again</a>
+        <a class="try-again font-montserrat pointer" @click="tryAgain">{{ $helper.trans('code_page_try_again') }}</a>
       </div>
     </template>
 
@@ -157,10 +157,10 @@
            v-bind:class="{'disable-pointer-events': invalid || valid || checking}">
         <label class="checkbox-wrapper transition">
                 <span class="regular">
-                    I agree with MyKeyBox's
+                    {{ $helper.trans('code_page_agree_with_terms_white') }}
                 </span>
           <span class="link color-main" @click="openRules">
-                    Terms & Rules
+                    {{ $helper.trans('code_page_agree_with_terms_yellow') }}
                 </span>
           <input type="checkbox" v-model="checked">
           <span class="checkmark transition"></span>
