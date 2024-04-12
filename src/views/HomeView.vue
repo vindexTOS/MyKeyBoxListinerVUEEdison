@@ -35,3 +35,24 @@
 <script setup>
 import DeviceCode from "@/components/DeviceCode.vue";
 </script>
+<script>
+export default {
+  data() {
+    return {
+      locales_interval: undefined,
+      showing_locale: 0,
+    }
+  },
+  mounted() {
+    this.locales_interval = setInterval(() => {
+      // this.$store.commit('setCurrentLocale', this.$store.state.available_locales[this.showing_locale].locale)
+      // this.showing_locale = (this.showing_locale + 1) % this.$store.state.available_locales.length
+    }, 2000)
+  },
+  beforeDestroy() {
+    if (this.locales_interval) {
+      clearInterval(this.locales_interval)
+    }
+  },
+}
+</script>
