@@ -1,8 +1,25 @@
 export default {
-    rules: '',
     unique_code: '',
-    current_locale: 'en',
+    current_locale: 'ka',
     fallback_locale: 'en',
+    available_locales: [
+        {
+            locale: 'en',
+            display_name: 'EN',
+        },
+        {
+            locale: 'ru',
+            display_name: 'RU',
+        },
+        {
+            locale: 'es',
+            display_name: 'ES',
+        },
+        {
+            locale: 'ka',
+            display_name: 'KA',
+        },
+    ],
     translations: {
         "en": {
             "header_title": "MyKeyBox",

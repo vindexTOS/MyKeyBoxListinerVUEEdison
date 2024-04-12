@@ -19,14 +19,18 @@ const app = new Vue({
 
 app.$axios.get('device_code').then((response) => {
     store.commit('setCode', response.data && response.data.code ? response.data.code : '')
+
+    app.$mount('#app')
+
+    // Refresh locales in every minute
+    setInterval(() => {
+        app.$helper.refreshAllLocales()
+    }, 60 * 1000)
+    app.$helper.refreshAllLocales()
+
+}, () => {
+    alert('Device code doesn\'t exist!')
+    setTimeout(() => {
+        location.reload();
+    }, 5000)
 })
-
-app.$mount('#app')
-
-let loadRules = () => {
-    app.$axios.get('api/GetRules').then((response) => {
-        store.commit('setRules', response.data && response.data.message ? response.data.message : '')
-    })
-}
-setInterval(loadRules, 60 * 1000)
-loadRules()

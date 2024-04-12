@@ -8,7 +8,7 @@
         <div class="rules-wrapper color-white">
           <div class="rules-block">
             <h2 class="font-russo-one">{{ $helper.trans('terms_and_conditions_title') }}</h2>
-            <div class="font-montserrat-regular" v-html="$store.state.rules"/>
+            <div class="font-montserrat-regular" v-html="$helper.trans('rules')"/>
           </div>
         </div>
         <div class="footer-contact font-montserrat color-white">
@@ -150,12 +150,6 @@ export default {
     },
     openPopup() {
       this.shown = true
-      this.$axios.get('api/GetRules').then((response) => {
-        let newRules = response.data && response.data.message ? response.data.message : ''
-        if (newRules) {
-          this.$store.commit('setRules', newRules)
-        }
-      })
     },
   },
 }
