@@ -1,6 +1,7 @@
 export default {
     unique_code: '',
-    current_locale: 'ka',
+    default_locale: 'en',
+    current_locale: 'en',
     fallback_locale: 'en',
     available_locales: [
         {

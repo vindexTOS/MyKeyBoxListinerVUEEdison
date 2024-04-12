@@ -6,6 +6,11 @@
         <div class="flex-center-container">
             <router-link :to="{name: 'code'}" class="press-to-start font-montserrat">{{ $helper.trans('home_screen_press_to_start') }}</router-link>
         </div>
+        <div class="flags">
+            <div v-for="locale in $store.state.available_locales">
+              <img :src="`/flags/${locale.locale}.jpg`" @click="setLocale(locale.locale)"/>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -30,6 +35,19 @@
     padding: 28px 48px;
     margin-top: 70px;
   }
+
+  .flags {
+    display: flex;
+    justify-content: space-between;
+    width: 700px;
+    margin: auto;
+    margin-top: 30px;
+
+    img {
+      width: 130px;
+      height: 80px;
+    }
+  }
 }
 </style>
 <script setup>
@@ -37,22 +55,13 @@ import DeviceCode from "@/components/DeviceCode.vue";
 </script>
 <script>
 export default {
-  data() {
-    return {
-      locales_interval: undefined,
-      showing_locale: 0,
-    }
-  },
   mounted() {
-    this.locales_interval = setInterval(() => {
-      // this.$store.commit('setCurrentLocale', this.$store.state.available_locales[this.showing_locale].locale)
-      // this.showing_locale = (this.showing_locale + 1) % this.$store.state.available_locales.length
-    }, 2000)
+    this.setLocale(this.$store.state.default_locale)
   },
-  beforeDestroy() {
-    if (this.locales_interval) {
-      clearInterval(this.locales_interval)
-    }
+  methods: {
+    setLocale(locale) {
+      this.$store.commit('setCurrentLocale', locale)
+    },
   },
 }
 </script>
