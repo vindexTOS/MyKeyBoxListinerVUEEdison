@@ -8,7 +8,7 @@
         </div>
         <div class="flags">
             <div v-for="locale in $store.state.available_locales">
-              <img :src="`/flags/${locale.locale}.jpg`" @click="setLocale(locale.locale)"/>
+              <img :src="`/flags/${(locale.locale === 'en' ? 'us' : locale.locale)}.jpg`" @click="setLocale(locale.locale)"/>
             </div>
         </div>
     </section>
