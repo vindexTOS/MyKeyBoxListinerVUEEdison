@@ -103,6 +103,11 @@ export default {
 </script>
 
 <style>
+/* Disable left right scroll */
+html, body {
+  overscroll-behavior-x: none;
+}
+
 @keyframes rippleAnimation {
   to {
     transform: scale(4);
