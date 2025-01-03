@@ -27,7 +27,7 @@
 }
 
 :global(*) {
-  cursor: none;
+  // cursor: none;
 }
 
 /* Add styles for the tap effect */

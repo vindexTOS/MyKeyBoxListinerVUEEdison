@@ -1,25 +1,23 @@
 <template>
   <section class="choose-locker">
-    <Back :to="{name: 'home'}"/>
-    <Rules :back="{name: 'code'}"/>
+    <Back :to="{ name: 'home' }" />
+    <Rules :back="{ name: 'code' }" />
     <div>
       <div class="row-wrapper">
         <div class="text-wrapper">
           <div class="text-block color-white">
             <div class="font-montserrat">
-              {{ $helper.trans('message_take_key_from_yellow_box_line_1') }}<br/>
-              <span class="color-main">{{ $helper.trans('message_take_key_from_yellow_box_line_2_yellow') }}</span> {{ $helper.trans('message_take_key_from_yellow_box_line_2_white') }}<br/>
+              {{ $helper.trans('message_take_key_from_yellow_box_line_1') }}<br />
+              <span class="color-main">{{ $helper.trans('message_take_key_from_yellow_box_line_2_yellow') }}</span> {{
+                $helper.trans('message_take_key_from_yellow_box_line_2_white') }}<br />
               {{ $helper.trans('message_take_key_from_yellow_box_line_3') }}
             </div>
           </div>
         </div>
         <div class="lockers-wrapper">
           <div class="lockers-grid">
-            <div
-                class="item font-montserrat"
-                v-for="(boxData, index) in boxes"
-                v-bind:class="{selected: isCurrentBox(index)}"
-            >
+            <div class="item font-montserrat" v-for="(boxData, index) in boxes"
+              v-bind:class="{ selected: isCurrentBox(index) }">
               {{ index + 1 }}
             </div>
           </div>
@@ -53,11 +51,14 @@ export default {
   methods: {
     loadBoxes() {
       this.order_id = this.$route.query.order_id
-      this.$axios.get('api/GetBoxes').then((response) => {
-        this.boxes = response.data
-        this.box_index = this.getCurrentBoxIndex()
-        this.box_id = this.boxes[this.box_index].boxId
 
+
+      this.$axios.get('api/GetBoxesByUniqueKey/' + this.$store.state.unique_code).then((response) => {
+        console.log(response.data)
+        this.boxes = response.data.boxes
+        this.box_index = this.getCurrentBoxIndex()
+        this.box_id = this.boxes[this.box_index].id
+        console.log(this.box_index)
         this.deviceOpenTheDoor(this.box_index).then((response) => {
           if (response.status === 200) {
             this.apiSetOrderStatus(4).then((response) => {
@@ -89,14 +90,14 @@ export default {
     },
     showThankYou(timeout = 5000) {
       this.apiSetOrderStatus(5) // Door closed  by dealer, key in box
-      this.$router.push({name: 'thank-you'})
+      this.$router.push({ name: 'thank-you' })
       setTimeout(() => {
-        this.$router.push({name: 'home'})
+        this.$router.push({ name: 'home' })
       }, timeout)
     },
     showCloseDoorAndStartInterval(interval = 1000) {
       let index = this.box_index
-      this.$router.push({name: 'close-the-door'})
+      this.$router.push({ name: 'close-the-door' })
       let checkDoorCloseInterval = null;
       checkDoorCloseInterval = setInterval(() => {
         this.$axios.get('/check').then((response) => {
@@ -127,7 +128,11 @@ export default {
     },
 
     apiSetOrderStatus(status_id) {
-      return this.$axios.post(`api/SetOrderStatus?orderId=${this.order_id}&boxId=${this.box_id}&statusId=${status_id}`)
+      return this.$axios.post(`api/SetOrderStatus`, {
+        "orderId": this.order_id,
+        "boxId": this.box_id,
+        "status": status_id
+      })
     },
     deviceOpenTheDoor(index) {
       return this.$axios.get('/open/' + index)

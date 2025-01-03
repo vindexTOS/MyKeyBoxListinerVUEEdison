@@ -6,8 +6,8 @@
 
     <div class="box-wrapper color-white">
       <div class="block">
-        <h3 class="font-russo-one">{{ $helper.trans('confirm_car_details_color') }}</h3>
-        <div class="font-montserrat-regular">{{ $route.query.color ? $route.query.color : '-' }}</div>
+        <!-- <h3 class="font-russo-one">{{ $helper.trans('confirm_car_details_color') }}</h3> -->
+        <!-- <div class="font-montserrat-regular">{{ $route.query.color ? $route.query.color : '-' }}</div> -->
         <h3 class="font-russo-one mt-2">{{ $helper.trans('confirm_car_details_vin_code') }}</h3>
         <div class="font-montserrat-regular">{{ $route.query.vin ? $route.query.vin : '-' }}</div>
         <h3 class="font-russo-one mt-2">{{ $helper.trans('confirm_car_details_type') }}</h3>

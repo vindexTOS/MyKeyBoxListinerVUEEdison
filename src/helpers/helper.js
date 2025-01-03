@@ -14,7 +14,7 @@ class Helper {
     }
 
     refreshLocale(locale, afterStoreCommit = undefined) {
-        this.vue.$axios.get(`api/GetTranslatedContent?prefix=${locale}`).then((response) => {
+        this.vue.$axios.post(`api/GetLanguage?language=${locale}`).then((response) => {
             this.vue.$set(store.state.translations, locale, response.data)
             if (afterStoreCommit) {
                 afterStoreCommit()

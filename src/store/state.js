@@ -1,5 +1,6 @@
 export default {
     unique_code: '',
+    order_id:null,
     default_locale: 'en',
     current_locale: 'en',
     fallback_locale: 'en',
@@ -40,7 +41,7 @@ export default {
             "contact_email": "help@mykeybox.com",
 
             "code_page_please_enter_your_white": "Please Enter Your",
-            "code_page_6_digit_code_yellow": "6 Digit Code",
+            "code_page_5_digit_code_yellow": "5 Digit Code",
             "code_page_pin_code_is_incorrect": "Pin code is incorrect. Try again",
             "code_page_pin_code_is_correct": "Your pin code is correct!",
             "code_page_try_again": "Try again",

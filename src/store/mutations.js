@@ -5,4 +5,10 @@ export default {
     setCurrentLocale(state, locale) {
         state.current_locale = locale
     },
+    setOrderId(state, order_id) {
+        state.order_id = order_id;  
+        console.log(order_id )
+        console.log( state.order_id)
+
+    },
 }

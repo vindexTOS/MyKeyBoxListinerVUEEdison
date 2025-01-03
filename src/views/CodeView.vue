@@ -5,7 +5,7 @@
     <Title/>
     <div class="enter-code-text-wrapper text-center font-montserrat">
       <span class="color-white">{{ $helper.trans('code_page_please_enter_your_white') }} </span>
-      <span class="color-main">{{ $helper.trans('code_page_6_digit_code_yellow') }}</span>
+      <span class="color-main">{{ $helper.trans('code_page_5_digit_code_yellow') }}</span>
     </div>
 
     <div class="code-container">
@@ -48,12 +48,12 @@
             :value="getCodeCharAt(4)"
             readonly disabled
         />
-        <input
+        <!-- <input
             class="font-prompt text-center transition"
             v-bind:class="{filled: code.length > 5, invalid: invalid, valid: valid}"
             :value="getCodeCharAt(5)"
             readonly disabled
-        />
+        /> -->
       </div>
 
       <!--            <input-->
@@ -85,12 +85,20 @@
              v-bind:class="{disabled: type === 'C' || checking}">
           C
         </div>
-        <div class="font-montserrat color-white transition disabled"></div>
+        <div class="font-montserrat color-white transition" @click="setType('S')"
+             v-bind:class="{disabled: type === 'S'} || checking">
+          S
+        </div>
         <div class="font-montserrat color-white transition" @click="setType('D')"
              v-bind:class="{disabled: type === 'D'} || checking">
           D
         </div>
-
+        
+        <!-- <div v-for="n in 9" :key="n">
+  <div class="font-montserrat color-white transition" v-bind:class="{disabled: code.length === max_length}"
+             @click="addCharacter(n)">{{n}}
+        </div>
+</div> -->
         <div class="font-montserrat color-white transition" v-bind:class="{disabled: code.length === max_length}"
              @click="addCharacter(1)">1
         </div>
@@ -174,6 +182,8 @@
 import Back from "@/components/Back.vue"
 import Title from "@/components/Title.vue"
 import Rules from "@/components/Rules.vue";
+import { mapMutations } from 'vuex';
+
 </script>
 
 <script>
@@ -187,7 +197,7 @@ export default {
       checking: false,
       valid: false,
 
-      max_length: 6,
+      max_length: 5,
     }
   },
   computed: {
@@ -196,6 +206,8 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(['setOrderId']),
+
     getCodeCharAt(index) {
       return this.code.length > index ? this.code[index] : ''
     },
@@ -220,26 +232,29 @@ export default {
     checkCode() {
       if (!this.checkCodeDisabled) {
         this.checking = true;
-        this.$axios.get(`api/GetOrderByCode?Code=${this.type}:${this.code}`).then((response) => {
-          if (
-              response.data &&
-              response.data.orderStatus &&
-              response.data.id && (
-                  (this.type.toLowerCase() === 'c' && [3].includes(response.data.orderStatus)) || // Door closed  by dealer, key in box
-                  (this.type.toLowerCase() === 'd' && [1].includes(response.data.orderStatus)) // Key is not in box
-              )
-          ) {
+        this.$axios.get(`api/GetOrderByDoorCode/${this.type}:${this.code}`).then((response) => {
+
+          let data = response.data
+          console.log( response.data.confirmedByDealership)
+         const isConfirmedByDealership = data && data.confirmedByDealership;
+        const isOrderStatusValid = [1, 3].includes(data.orderStatus);
+        const isDoorClosedByDealer = (this.type.toLowerCase() === 'c' && data.orderStatus === 3);
+        const isKeyNotInBox = (this.type.toLowerCase() === 'd' && data.orderStatus === 1);
+
+          if (isConfirmedByDealership && (isOrderStatusValid || isDoorClosedByDealer || isKeyNotInBox) ) {
             this.valid = true;
+            this.setOrderId(response.data.orderId); 
+            console.log(response.data)
             setTimeout(() => {
               this.$router.push({
                 name: 'confirm-car-details',
                 query: {
-                  order_id: response.data.id,
+                  order_id: response.data.orderId,
                   box_id: response.data.boxName,
                   type: this.type.toLowerCase(),
                   vin: response.data.vin,
                   color: response.data.color,
-                  vehicle: response.data.vechile,
+                  vehicle: response.data.vehicle,
                 }
               })
             }, 1000)
